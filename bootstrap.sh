@@ -20,6 +20,9 @@ if ! [ -L /var/www ]; then
   rm -rf /var/www/*
   ln -fs /vagrant /var/www/html
 fi
+sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+a2enmod rewrite
+service apache2 restart
 
 printf "%$(tput cols)s\n"|tr " " "="
 echo "Installing Git and dev tools"
