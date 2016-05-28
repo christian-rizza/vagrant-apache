@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
+sed -i '/^#.*force_color_prompt=yes/s/^#//' ./.bashrc
+echo "cd /var/www/html/" >> ./.bashrc
 
 printf "%$(tput cols)s\n"|tr " " "="
 echo "Starting provisioning (Update list packages)"
