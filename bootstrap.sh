@@ -15,7 +15,19 @@ printf "%$(tput cols)s\n"|tr " " "="
 apt-get install -y apache2
 apt-get install -y php5
 apt-get install -y php5-xdebug
-echo "Apache configuration for Vagrant"
+
+
+printf "%$(tput cols)s\n"|tr " " "="
+echo "Installing MySql"
+printf "%$(tput cols)s\n"|tr " " "="
+sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password vagrant'
+sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password vagrant'
+sudo apt-get -y install mysql-server libapache2-mod-auth-mysql php5-mysql
+
+
+printf "%$(tput cols)s\n"|tr " " "="
+echo "Configuring Apache for Vagrant"
+printf "%$(tput cols)s\n"|tr " " "="
 if ! [ -L /var/www ]; then
   rm -rf /var/www/*
   ln -fs /vagrant /var/www/html
