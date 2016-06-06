@@ -34,6 +34,11 @@ if ! [ -L /var/www ]; then
 fi
 sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 a2enmod rewrite
+#Configuring XDebug
+echo "zend_extension=xdebug.so">/etc/php5/mods-available/xdebug.ini
+echo "xdebug.remote_enable = on">>/etc/php5/mods-available/xdebug.ini
+echo "xdebug.remote_connect_back = on">>/etc/php5/mods-available/xdebug.ini
+
 service apache2 restart
 
 printf "%$(tput cols)s\n"|tr " " "="
